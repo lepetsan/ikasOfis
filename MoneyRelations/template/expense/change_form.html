@@ -1,7 +1,36 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_urls %}
 {% block admin_change_form_document_ready %}
+ {% block extrahead %}
+    {{ block.super }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+       <script>
+        $(function() {
+            {% if user.get_profile.is_customer %}
+                $('#id_of_field_block').hide();
+            {% endif %}
+        });
+
+        $(document).ready(function() {
+     $('#id_MainCategory').select2();
+     $('#id_SubCategory').select2();
+
+});
+
+    </script>
+
+{% endblock extrahead %}
+
+
+
+
  <script>
+
+
+
+
+
  $("#id_Currency").after("<p id=\"SUM\">In TL</p>");
  $("#SUM").hide();
  $( ".field-box.field-SubCategory" ).hide();
@@ -9,7 +38,7 @@
 
 
 category_map = {{ category_map|safe }}
-$("#id_MainCategory").hover(function() {
+
 
 
 $("#id_MainCategory").change(function() {   //this function is used to change SubCategory
@@ -27,7 +56,7 @@ $("#id_MainCategory").change(function() {   //this function is used to change Su
   });
   {#var options = $(this).data('options').filter('[value=' + id + ']');#}
   $('#id_SubCategory').html(options);
-});
+
 
 
 
