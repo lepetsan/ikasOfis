@@ -1,0 +1,26 @@
+{% extends 'expense/base.html' %}
+{% block body %}
+    <table id = "table" class = "table table-bordered">
+        <thead class = "alert-success">
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in all_members %}
+            <tr>
+                <td>{{ expense.PaymentDate }}</td>
+                <td>{{ expense.PaymentStatus }}</td>
+                <td>{{ expense.TypeOfDocument }}</td>
+                <td>{{ expense.DocumentID }}</td>
+                <td>{{ expense.PaidName_text }}</td>
+            </tr>
+           {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

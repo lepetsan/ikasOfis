@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import jet
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,15 +32,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    'table',
+    'django_tables2',
+    'tutorial',
+    'django_countries',
+    'products',
+    'customers',
+    'MoneyRelations',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
-    'MoneyRelations.apps.MoneyrelationsConfig',
-    'customer.apps.CustomerConfig'
+    # 'MoneyRelations.apps.MoneyrelationsConfig',
+    'image_cropping',
+    'easy_thumbnails',
+    #'customer.apps.CustomerConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +69,8 @@ ROOT_URLCONF = 'ikasOfis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'MoneyRelations', 'template')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -113,12 +126,24 @@ TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
+
+DATE_FORMAT = "d-m-Y"
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
+
+from easy_thumbnails.conf import  Settings as easy_thumbnails_settings
+THUMBNAIL_PROCESSORS =(
+    'image_cropping.thumbnail_processors.crop_corners',
+)
+
+THUMBNAIL_PROCESSORS += easy_thumbnails_settings.THUMBNAIL_PROCESSORS

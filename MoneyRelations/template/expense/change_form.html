@@ -1,0 +1,76 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+{% block admin_change_form_document_ready %}
+ <script>
+ $("#id_Currency").after("<p id=\"SUM\">In TL</p>");
+ $("#SUM").hide();
+ $( ".field-box.field-SubCategory" ).hide();
+
+
+
+
+$("#id_MainCategory").hover(function() {
+
+
+$("#id_MainCategory").change(function() {   //this function is used to change SubCategory
+                                            //according to maincategory.
+  if ($(this).data('options') === undefined) {
+    /*Taking an array of all options-2 and kind of embedding it on the select1*/
+    $(this).data('options', $('#id_SubCategory option').clone());
+  }
+  var id = $(this).val();
+  var options = $(this).data('options').filter('[value=' + id + ']');
+  $('#id_SubCategory').html(options);
+});
+
+
+
+
+
+    $( ".field-box.field-SubCategory" ).fadeIn(1000);
+ });
+
+
+
+
+
+ $(document).ready(function (){
+    {##}
+    {#    $("#id_MainCategory").keypress(function() {#}
+    {#      $( ".field-box.field-SubCategory" ).fadeIn(1000);#}
+    {#{);#}
+
+     $("#id_Currency").change(function() {
+          $("#SUM").show(1000);
+            calculateTotal();
+    });
+
+     $("#id_PaymentSum").change(function() {
+            calculateTotal();
+    });
+ });
+
+$("#id_PayingEmployee").val("Mustafa Namoğlu") ;
+
+ function calculateTotal() {
+     var total;
+   if ($('input[name=Currency]:checked').val() === "USD" ) {
+               total=  $("#id_PaymentSum").val() * '{{dolar}}';
+            document.getElementById("SUM").innerHTML = parseFloat(total).toFixed(2) + " TL in Total";
+        }else if ($('input[name=Currency]:checked').val() === "EUR" ) {
+               total=  $("#id_PaymentSum").val() * '{{euro}}';
+            document.getElementById("SUM").innerHTML = parseFloat(total).toFixed(2) + " TL in Total";
+
+        }else if ($('input[name=Currency]:checked').val() === "TL" ) {
+              $("#SUM").hide(1000);
+        }
+}
+
+
+
+
+
+ </script>
+{% endblock %}
+
+

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DataTable</title>
+        <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf-6.4.3/jq-3.3.1/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.1/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.4.0/r-2.2.2/rg-1.0.3/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/zf-6.4.3/jq-3.3.1/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.1/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.4.0/r-2.2.2/rg-1.0.3/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.13/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+    </head>
+
+
+
+    <body>
+
+
+            <table id="example" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Date of Payment</th>
+                            <th>Payment Status</th>
+                            <th>Type of Document</th>
+                            <th>Document ID</th>
+                            <th>Paid Person / Firm</th>
+                            <th>Payment Sum</th>
+                            <th>Currency</th>
+                            <th>Total Sum In TRY</th>
+                            <th>Main Category</th>
+                            <th>Sub Category</th>
+                            <th>Method of Payment</th>
+                        </tr>
+                    </thead>
+            <tfoot>
+            <tr>
+                            <th>Date of Payment</th>
+                            <th>Payment Status</th>
+                            <th>Type of Document</th>
+                            <th>Document ID</th>
+                            <th>Paid Person / Firm</th>
+                            <th>Payment Sum</th>
+                            <th>Currency</th>
+                            <th>Total Sum In TRY</th>
+                            <th>Main Category</th>
+                            <th>Sub Category</th>
+                            <th>Method of Payment</th>
+            </tr>
+        </tfoot>
+                <tbody>
+            {% for expense in all_members %}
+            <tr>
+                <td>{{ expense.PaymentDate }}</td>
+                <td>{{ expense.PaymentStatus }}</td>
+                <td>{{ expense.TypeOfDocument }}</td>
+                <td>{{ expense.DocumentID }}</td>
+                <td>{{ expense.PaidName_text }}</td>
+                <td>{{ expense.PaymentSum }}</td>
+                <td>{{ expense.Currency }}</td>
+                <td>{{ expense.TotalSum }}</td>
+                <td>{{ expense.MainCategory }}</td>
+                <td>{{ expense.SubCategory }}</td>
+                <td>{{ expense.MethodOfPayment }}</td>
+            </tr>
+
+
+           {% endfor %}
+
+            </tbody>
+            <tfoot></tfoot>
+            </table>
+
+            <p id="p1"><b>Current Total Same as Overal Total</b></p>
+
+        <script>
+{#$(document).ready(function() {#}
+{#     $('#example').DataTable( {#}
+{#         #}
+{#         #}
+{##}
+{#        dom: 'Bfrtip',#}
+{#            buttons: [#}
+{#        'copy', 'excel', 'pdf'#}
+{#    ],  fixedHeader: true,#}
+{#        responsive: true,#}
+{##}
+{#        colReorder: true,#}
+{#        rowReorder: true,#}
+{#        keys: true,#}
+{#        autoFill: {enable: true},#}
+{##}
+{#        "columnDefs": [#}
+{#            {#}
+{#                // The `data` parameter refers to the data for the cell (defined by the#}
+{#                // `data` option, which defaults to the column being worked with, in#}
+{#                // this case `data: 0`.#}
+{#                "render": function ( data, type, row ) {#}
+{#                    return data +' ('+ row[3]+')';#}
+{#                },#}
+{#                "targets": 0#}
+{#            },#}
+{#            { "visible": false,  "targets": [ 3 ] }#}
+{##}
+{#        ]#}
+{##}
+{##}
+{#    } );#}
+{##}
+{##}
+{##}
+{#{ );#}
+
+{##}
+{#$( function() {#}
+{# $( "#datepicker" ).datepicker();#}
+{#{ );#}
+{##}
+{##}
+{#$('#example tfoot th').each( function () {#}
+{#    var title = $(this).text();#}
+{#    if (title === "Date of Payment") {#}
+{#        $(this).html( '<input type="text" id="datepicker" placeholder="Search '+title+'" />' );#}
+{#        }#}
+{#        else {#}
+{#            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );#}
+{#        }#}
+{#{ );#}
+
+$('#example').dataTable( {
+  "footerCallback": function( thead, data, start, end, display ) {
+    var api = this.api();
+    $( api.column( 7 ).footer() ).html(
+        api.column( 7 ).data().reduce( function ( a, b ) {
+            return (parseFloat(a) + parseFloat(b)).toFixed(2) + "  TL Overall Total";
+        }, 0 )
+    );
+  }
+
+} );
+
+
+
+$(document).ready(function (){
+    var sum = 0;
+
+ // use querySelector to find all second table cells
+ var cells8 = document.querySelectorAll("td:nth-of-type(8)");
+ var cells2 = document.querySelectorAll("td:nth-of-type(2)");
+
+ for (var i = 0; i < cells8.length; i++){
+      sum+=parseFloat(cells8[i].firstChild.data);
+
+      if( cells2[i].firstChild.data === "Not Paid"  ){
+        cells2[i].style.color  = "red";
+     }else{
+          cells2[i].style.color  = '#9ACD32';
+      }
+
+}
+ document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
+
+
+
+});
+
+
+$("#example_filter").keyup(function() {
+var sum = 0;
+
+ // use querySelector to find all second table cells
+ var cells8 = document.querySelectorAll("td:nth-of-type(8)");
+ var cells2 = document.querySelectorAll("td:nth-of-type(2)");
+
+ for (var i = 0; i < cells8.length; i++){
+      sum+=parseFloat(cells8[i].firstChild.data);
+
+      if( cells2[i].firstChild.data === "Not Paid"  ){
+        cells2[i].style.color  = "red";
+     }else{
+          cells2[i].style.color  = '#9ACD32';
+      }
+
+}
+
+
+ document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
+
+});
+
+$(document).click(function(e) {
+var sum = 0;
+
+ // use querySelector to find all second table cells
+ var cells8 = document.querySelectorAll("td:nth-of-type(8)");
+ var cells2 = document.querySelectorAll("td:nth-of-type(2)");
+
+ for (var i = 0; i < cells8.length; i++){
+      sum+=parseFloat(cells8[i].firstChild.data);
+
+      if( cells2[i].firstChild.data === "Not Paid"  ){
+        cells2[i].style.color  = "red";
+     }else{
+          cells2[i].style.color  = '#9ACD32';
+      }
+
+}
+
+
+ document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
+
+});
+
+
+
+
+
+
+
+
+
+        </script>
+
+<form action="/admin/MoneyRelations/expense/add/">
+    <input type="submit" value="Add Expenses" />
+</form>
+
+    </body>
+
+</html>

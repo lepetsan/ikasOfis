@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DataTable</title>
+        <meta charset="utf-8">
+      <!--   <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+      rel="stylesheet">
+
+    </head>
+
+
+
+    <body>
+
+
+{#        <tbody>#}
+            {% for expense in all_members %}
+            <tr>
+                <td>{{ expense.PaymentDate }}</td>
+                <td>{{ expense.PaymentStatus }}</td>
+                <td>{{ expense.TypeOfDocument }}</td>
+                <td>{{ expense.DocumentID }}</td>
+                <td>{{ expense.PaidName_text }}</td>
+            </tr>
+           {% endfor %}
+
+
+
+
+
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "columnDefs": [
+            {
+                // The `data` parameter refers to the data for the cell (defined by the
+                // `data` option, which defaults to the column being worked with, in
+                // this case `data: 0`.
+                "render": function ( data, type, row ) {
+                    return data +' ('+ row[3]+')';
+                },
+                "targets": 0
+            },
+            { "visible": false,  "targets": [ 3 ] }
+        ]
+    } );
+} );
+        </script>
+
+
+    </body>
+</html>
