@@ -101,61 +101,6 @@ tr.highlight {
             <p id="p1"><b>Current Total Same as Overal Total</b></p>
 
         <script>
-{#$(document).ready(function() {#}
-{#     $('#example').DataTable( {#}
-{#         #}
-{#         #}
-{##}
-{#        dom: 'Bfrtip',#}
-{#            buttons: [#}
-{#        'copy', 'excel', 'pdf'#}
-{#    ],  fixedHeader: true,#}
-{#        responsive: true,#}
-{##}
-{#        colReorder: true,#}
-{#        rowReorder: true,#}
-{#        keys: true,#}
-{#        autoFill: {enable: true},#}
-{##}
-{#        "columnDefs": [#}
-{#            {#}
-{#                // The `data` parameter refers to the data for the cell (defined by the#}
-{#                // `data` option, which defaults to the column being worked with, in#}
-{#                // this case `data: 0`.#}
-{#                "render": function ( data, type, row ) {#}
-{#                    return data +' ('+ row[3]+')';#}
-{#                },#}
-{#                "targets": 0#}
-{#            },#}
-{#            { "visible": false,  "targets": [ 3 ] }#}
-{##}
-{#        ]#}
-{##}
-{##}
-{#    } );#}
-{##}
-{##}
-{##}
-{#{ );#}
-
-{##}
-{#$( function() {#}
-{# $( "#datepicker" ).datepicker();#}
-{#{ );#}
-{##}
-{##}
-{#$('#example tfoot th').each( function () {#}
-{#    var title = $(this).text();#}
-{#    if (title === "Date of Payment") {#}
-{#        $(this).html( '<input type="text" id="datepicker" placeholder="Search '+title+'" />' );#}
-{#        }#}
-{#        else {#}
-{#            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );#}
-{#        }#}
-{#{ );#}
-
-
-
 
 
 
@@ -170,7 +115,6 @@ $('#example').dataTable( {
   }
 
 } );
-
 
 
 $(document).ready(function (){
@@ -193,9 +137,7 @@ $(document).ready(function (){
  document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
 
 
-
 });
-
 
 $("#example_filter").keyup(function() {
 var sum = 0;
@@ -214,7 +156,6 @@ var sum = 0;
       }
 
 }
-
 
  document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
 
@@ -238,12 +179,9 @@ var sum = 0;
 
 }
 
-
  document.getElementById("p1").innerHTML = sum.toFixed(2) + "  TL in Current Page";
 
 });
-
-
 
 
     $('#example tbody').on( 'click', 'tr', function () {
@@ -279,10 +217,6 @@ var sum = 0;
 
 
 </script>
-
-
-
-
 
 <form action="/admin/MoneyRelations/expense/add/">
     <input type="submit" value="Add Expenses" />
