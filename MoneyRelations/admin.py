@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from MoneyRelations.utils import get_currencies
-from .models import Expense
+from .models import Expense, mainCategorySubCategoryRelation
 from datetime import datetime
 from . import models
 from django.db.models import Count
@@ -77,6 +77,7 @@ class ExpenseAdmin(admin.ModelAdmin):
         extra_context = extra_context or {}
         extra_context["euro"] = TRYpEUR
         extra_context["dolar"] = TRYpUSD
+        extra_context["category_map"] = mainCategorySubCategoryRelation
         return super(ExpenseAdmin, self).changeform_view(request, object_id=object_id, form_url=form_url,
 
                                              extra_context=extra_context)

@@ -8,7 +8,7 @@
 
 
 
-
+category_map = {{ category_map|safe }}
 $("#id_MainCategory").hover(function() {
 
 
@@ -19,7 +19,13 @@ $("#id_MainCategory").change(function() {   //this function is used to change Su
     $(this).data('options', $('#id_SubCategory option').clone());
   }
   var id = $(this).val();
-  var options = $(this).data('options').filter('[value=' + id + ']');
+  var obj = this
+  var subcategories = category_map[id];
+  options = [];
+  subcategories.forEach(function(id, index){
+      options.push( $(obj).data('options').filter('[value=' + id + ']'));
+  });
+  {#var options = $(this).data('options').filter('[value=' + id + ']');#}
   $('#id_SubCategory').html(options);
 });
 

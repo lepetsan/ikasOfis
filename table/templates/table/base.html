@@ -21,6 +21,19 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
+        <style>
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+tr.highlight {
+    background-color: blue !important;
+}
+
+</style>
+
+
     </head>
 
 
@@ -28,7 +41,7 @@
     <body>
 
 
-            <table id="example" class="display" style="width:100%">
+            <table id="example" class="cell-border" style="width:100%">
                     <thead>
                         <tr>
                             <th>Date of Payment</th>
@@ -141,6 +154,11 @@
 {#        }#}
 {#{ );#}
 
+
+
+
+
+
 $('#example').dataTable( {
   "footerCallback": function( thead, data, start, end, display ) {
     var api = this.api();
@@ -166,7 +184,7 @@ $(document).ready(function (){
       sum+=parseFloat(cells8[i].firstChild.data);
 
       if( cells2[i].firstChild.data === "Not Paid"  ){
-        cells2[i].style.color  = "red";
+        cells2[i].style.color  = "#DB0000";
      }else{
           cells2[i].style.color  = '#9ACD32';
       }
@@ -190,7 +208,7 @@ var sum = 0;
       sum+=parseFloat(cells8[i].firstChild.data);
 
       if( cells2[i].firstChild.data === "Not Paid"  ){
-        cells2[i].style.color  = "red";
+        cells2[i].style.color  = "#DB0000";
      }else{
           cells2[i].style.color  = '#9ACD32';
       }
@@ -213,7 +231,7 @@ var sum = 0;
       sum+=parseFloat(cells8[i].firstChild.data);
 
       if( cells2[i].firstChild.data === "Not Paid"  ){
-        cells2[i].style.color  = "red";
+        cells2[i].style.color  = "#DB0000";
      }else{
           cells2[i].style.color  = '#9ACD32';
       }
@@ -228,12 +246,43 @@ var sum = 0;
 
 
 
+    $('#example tbody').on( 'click', 'tr', function () {
+    $(this).toggleClass('selected');
+    } );
+
+
+     $('#example tbody')
+        .on( 'mouseenter', 'td', function () {
+            var colIdx = table.cell(this).index().column;
+
+            $( table.cells().nodes() ).removeClass( 'highlight' );
+            $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+        } );
+
+
+    $('#button').click( function () {
+        alert( table.rows('.selected').data().length +' row(s) selected' );
+    } );
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+
+</script>
 
 
 
 
-
-        </script>
 
 <form action="/admin/MoneyRelations/expense/add/">
     <input type="submit" value="Add Expenses" />

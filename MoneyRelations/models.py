@@ -17,31 +17,37 @@ CurrencyChoices = (
     ('EUR', 'EUR'),
 )
 
-mainCategoryChoices = (
-    ('1', 'Demirbaş'),
-    ('2', 'Yatırım'),
-    ('3', 'Sabit Gider'),
-    ('4', 'Pazarlama'),
+mainCategoryChoices = {
+    '1': 'Demirbaş',
+    '2': 'Yatırım',
+    '3': 'Sabit Gider',
+    '4': 'Pazarlama',
+    }
 
-)
 
-subCategoryChoices = (
-    ('1', 'Ofis'),
-    ('1', 'Bilgisayar'),
-    ('1', 'Diğer'),
-    ('2', 'Marka / Patent'),
-    ('2', 'Diğer'),
-    ('3', 'Ticket'),
-    ('3', 'Ekip Yemek / Motivasyon'),
-    ('3', 'IK'),
-    ('3', 'Internet'),
-    ('3', 'Aidat / Isınma'),
-    ('3', 'Vergi/Harç/Noter'),
-    ('3', 'Diğer'),
-    ('4', 'POP'),
-    ('4', 'Diğer'),
+subCategoryChoices = {
+    '1': 'Ofis',
+    '2': 'Bilgisayar',
+    '3': 'Diğer',
+    '4': 'Marka / Patent',
+    '5': 'Diğer',
+    '6': 'Ticket',
+    '7': 'Ekip Yemek / Motivasyon',
+    '8': 'IK',
+    '9': 'Internet',
+    '10': 'Aidat / Isınma',
+    '11': 'Vergi/Harç/Noter',
+    '12': 'Diğer',
+    '13': 'POP',
+    '14': 'Diğer',
+}
 
-)
+mainCategorySubCategoryRelation = {
+    '1': ['1', '2', '3'],
+    '2': ['4', '5', '6'],
+    '3': ['7', '8', '9'],
+    '4': ['10', '11', '12']
+}
 
 PaymentChoices = (
     ('Paid', 'Yes'),
@@ -57,8 +63,8 @@ class Expense(models.Model):
     PaymentDate= models.DateField('Date of Payment', default=datetime.now, blank=False )
     # MainCategory = models.OneToOneField('MainCat',on_delete=models.CASCADE,default=True)
     # SubCategory = models.OneToOneField('SubCat',on_delete=models.CASCADE,default=True)
-    MainCategory = models.CharField('Main Category',max_length=9, choices=mainCategoryChoices, default='')
-    SubCategory = models.CharField('Sub Category',max_length=9, choices=subCategoryChoices, default='')
+    MainCategory = models.CharField('Main Category',max_length=9, choices=mainCategoryChoices.items(), default='')
+    SubCategory = models.CharField('Sub Category',max_length=9, choices=subCategoryChoices.items(), default='')
 
     PaymentSum = models.DecimalField('Payment Sum', default=0,max_digits=12,decimal_places=2,validators=[MaxValueValidator(999999999999)])
     UltraTotalSum = models.DecimalField('Payment Sum', default=0, max_digits=12, decimal_places=2,
