@@ -14,7 +14,7 @@ def index_redirect(request):
 
 def index(request):
     all_members = Expense.objects.all()
-    for a in all_members:
-        a.MainCategory = mainCategoryChoices[a.MainCategory]
-        a.SubCategory = subCategoryChoices[a.SubCategory]
+    # for a in all_members:
+        # a.MainCategory = mainCategoryChoices[a.MainCategory]
+        # a.SubCategory = subCategoryChoices[a.SubCategory]
     return render(request, 'table/index.html', {'all_members': all_members})

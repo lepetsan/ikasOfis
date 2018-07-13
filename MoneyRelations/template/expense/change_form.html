@@ -5,8 +5,87 @@
     {{ block.super }}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://ilgilenio.github.io/Otag/otag.js"></script>
+
+
        <script>
 
+
+
+
+
+
+       {# var sampleData = [{#}
+       {#     id: 1,#}
+       {#     name: 'Ford'#}
+       {# },{#}
+       {#     id:2,#}
+       {#     name:'Audi'#}
+       {# }#}
+       {##}
+       {# ]#}
+       {##}
+       {#//var element = document.getElementById("id_mainCategoryExpense");#}
+       {#var  MainTextBox = '#id_mainCategoryExpense'.get()   // get = .getElementByID ile aynı iş#}
+       {#    ,container = MainTextBox.parentElement // MainTextBox'ın atasını container'a atıyor#}
+       {#    ,MainDropDown= '#MainDropDown'.init() // //MainDropDown=document.createElement('div'); MainDropDown.id='MainDropDown'#}
+       {#    ,Results = '.Results'.init() //Results=document.createElement('div'); Results.className='Results'#}
+       {#    ,contents= container.children; // Container'ın çocuklarını getir, altında bulunan bütün ögeler#}
+       {#console.log(contents); //consola bas#}
+       {##}
+       {#container.append([contents[0], MainDropDown, contents[2]]); // içine ekle,#}
+       {#MainDropDown.append([MainTextBox, Results]);#}
+       {#MainTextBox.data = sampleData;#}
+       {#MainTextBox.onkeyup=function () {#}
+       {#    if(this.value.length > 0){#}
+       {#        var query = new RegExp(this.value.toLowerCase()+'.+');#}
+       {#        results=this.data#}
+       {#            // Diziyi süz(filtrele)#}
+       {#            .filter(function(i){#}
+       {#                 return query.test(i.name.toLowerCase())#}
+       {#            })#}
+       {#            // Sonuçları Ögeye çevir#}
+       {#            .map(function(i){#}
+       {#                 return '.option'#}
+       {#                             .set(i.name)#}
+       {#                             .prop({#}
+       {#                                 onclick:function () {#}
+       {#                                     MainTextBox.itemSelected(i.name)#}
+       {#                                 }#}
+       {#                             }) //e=document.createElement('div'); e.className = 'option'; e.innerHTML=i#}
+       {#            })#}
+       {#        Results.html(results);#}
+       {#    }else{#}
+       {#        Results.innerHTML='';#}
+       {#    }#}
+       {##}
+       {#MainTextBox.itemSelected=function (item) {#}
+       {#    this.value = item#}
+
+        {#//element.innerHTML =('<div class="custom-select" style="width:200px;">')#}
+ /* <select>
+    <option value="0">Select car:</option>
+    <option value="1">Audi</option>
+    <option value="2">BMW</option>
+    <option value="3">Citroen</option>
+    <option value="Ford">Ford</option>
+    <option value="5">Honda</option>
+    <option value="6">Jaguar</option>
+    <option value="7">Land Rover</option>
+    <option value="8">Mercedes</option>
+    <option value="9">Mini</option>
+    <option value="10">Nissan</option>
+    <option value="11">Toyota</option>
+    <option value="12">Volvo</option>
+  </select>
+</div>");*/
+
+           {#var dropdown = document.getElementById("#id_mainCategoryExpense");#}
+           {##}
+           {# var opt = document.createElement("option");#}
+           {# opt.text = 'Demirbaş';#}
+           {# opt.value = 'somethings value';#}
+           {# dropdown.options.add(opt);#}
 
     </script>
 
@@ -21,14 +100,22 @@
 
  $("#id_Currency").after("<p id=\"SUM\">In TL</p>");
  $("#SUM").hide();
- $( ".field-box.field-SubCategory" ).hide();
+  $("#change_id_mainCategoryExpense").hide();
+    $("#change_id_SubCategoryExpense").hide();
+ $( ".field-box.field-SubCategoryExpense" ).hide();
 
 
  $(document).ready(function (){
     {##}
-    {#    $("#id_MainCategory").keypress(function() {#}
-    {#      $( ".field-box.field-SubCategory" ).fadeIn(1000);#}
+    {#    $("#id_mainCategoryExpense").keypress(function() {#}
+    {#      $( ".field-box.field-SubCategoryExpense" ).fadeIn(1000);#}
     {#{);#}
+
+
+
+
+
+
 
 
              $(function() {
@@ -38,19 +125,19 @@
         });
 
         $(document).ready(function() {
-     $('#id_MainCategory').select2();
-     $('#id_SubCategory').select2();
+     $('#id_mainCategoryExpense').select2();
+     $('#id_SubCategoryExpense').select2();
 
 });
 
-     $("#id_MainCategory").change(function() {   //this function is used to change SubCategory
+     $("#id_mainCategoryExpense").change(function() {   //this function is used to change SubCategoryExpense
                                             //according to maincategory.
 
-    $( ".field-box.field-SubCategory" ).fadeIn(1000);
+    $( ".field-box.field-SubCategoryExpense" ).fadeIn(500);
  });
 
      $("#id_Currency").change(function() {
-          $("#SUM").show(1000);
+          $("#SUM").show(500);
             calculateTotal();
     });
 

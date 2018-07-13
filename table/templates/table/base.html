@@ -28,7 +28,7 @@ tfoot input {
         box-sizing: border-box;
     }
 tr.highlight {
-    background-color: blue !important;
+    background-color: #4285F4 !important;
 }
 
 </style>
@@ -85,8 +85,8 @@ tr.highlight {
                 <td>{{ expense.PaymentSum }}</td>
                 <td>{{ expense.Currency }}</td>
                 <td>{{ expense.TotalSum }}</td>
-                <td>{{ expense.MainCategory }}</td>
-                <td>{{ expense.SubCategory }}</td>
+                <td>{{ expense.mainCategoryExpense }}</td>
+                <td>{{ expense.SubCategoryExpense }}</td>
                 <td>{{ expense.description }}</td>
                 <td>{{ expense.MethodOfPayment }}</td>
             </tr>

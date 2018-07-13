@@ -54,6 +54,19 @@ PaymentChoices = (
     ('Not Paid', 'No'),
 )
 
+
+
+class maincategory(models.Model):
+    mainCategoryMember = models.CharField(max_length=30)
+    def __str__(self):
+        return self.mainCategoryMember
+
+class subcategory(models.Model):
+    subCategoryMember = models.CharField(max_length=30)
+    def __str__(self):
+        return self.subCategoryMember
+
+
 class Expense(models.Model):
     PaidName_text = models.CharField('Paid Person/Firm', max_length=200, help_text="Please enter the name of the Paid Employee/Firm", blank=False, default='')
     TypeOfDocument = models.CharField(max_length=9, choices=DocumentChoices, default='Fatura')
@@ -61,10 +74,9 @@ class Expense(models.Model):
     DocumentID = models.CharField('Document ID', max_length=200, help_text="Please enter the document ID", blank=False, default='')
     PaymentStatus = models.CharField(max_length=9, choices=PaymentChoices,default='Yes')
     PaymentDate= models.DateField('Date of Payment', default=datetime.now, blank=False )
-    # MainCategory = models.OneToOneField('MainCat',on_delete=models.CASCADE,default=True)
-    # SubCategory = models.OneToOneField('SubCat',on_delete=models.CASCADE,default=True)
-    MainCategory = models.CharField('Main Category',max_length=30, default='')
-    SubCategory = models.CharField('Sub Category',max_length=30,  default='')
+
+    mainCategoryExpense = models.ForeignKey('maincategory',max_length=30, default='',help_text="Please start typing.. Sub Category will appear after you select Main Category",on_delete=models.CASCADE)
+    SubCategoryExpense = models.ForeignKey('subcategory',max_length=30, default='',help_text="Please start typing.. Sub Category will appear after you select Main Category",on_delete=models.CASCADE)
 
     PaymentSum = models.DecimalField('Payment Sum', default=0,max_digits=12,decimal_places=2,validators=[MaxValueValidator(999999999999)])
     UltraTotalSum = models.DecimalField('Payment Sum', default=0, max_digits=12, decimal_places=2,
@@ -99,8 +111,6 @@ class Expense(models.Model):
             self.TotalSum = self.PaymentSum * Decimal(TRYpUSD)
         if self.Currency == 'EUR':
             self.TotalSum = self.PaymentSum * Decimal(TRYpEUR)
-
-
 
 
         super(Expense, self).save(*args, **kwargs)

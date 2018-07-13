@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from MoneyRelations.utils import get_currencies
-from .models import Expense, mainCategorySubCategoryRelation
+from .models import Expense, mainCategorySubCategoryRelation, maincategory, subcategory
 from datetime import datetime
 from . import models
 from django.db.models import Count
@@ -24,10 +24,10 @@ class ExpenseAdmin(admin.ModelAdmin):
     date_hierarchy = 'PaymentDate'
     list_display = (
         'PaymentDate', 'PaymentStatus', 'TypeOfDocument', 'DocumentID', 'PaidName_text', 'PaymentSum', 'Currency','TotalSum',
-        'MainCategory', 'SubCategory','MethodOfPayment', )
-    list_filter = ('PaymentDate', 'TypeOfDocument', 'MainCategory', 'SubCategory',)
+        'mainCategoryExpense','SubCategoryExpense','MethodOfPayment', )
+    list_filter = ('PaymentDate', 'TypeOfDocument','mainCategoryExpense','SubCategoryExpense',)
     search_fields = ('PaidName_text', 'DateOfDocument', 'DocumentID', 'PaymentSum', 'TypeOfDocument',
-                     'PaymentDate', 'MainCategory', 'SubCategory', 'MethodOfPayment', 'PayingEmployee',
+                     'PaymentDate', 'mainCategoryExpense', 'SubCategoryExpense', 'MethodOfPayment', 'PayingEmployee',
                      'BooleanPayment')
     # list_editable = ('TypeOfDocument', 'BooleanPayment')
     save_on_top = True
@@ -35,14 +35,14 @@ class ExpenseAdmin(admin.ModelAdmin):
     ordering = ['-DateOfDocument']
     list_display_links = (
         'PaymentDate', 'PaymentStatus', 'TypeOfDocument', 'DocumentID', 'PaidName_text', 'PaymentSum', 'Currency',
-        'MainCategory', 'SubCategory','MethodOfPayment', 'TotalSum',)
+        'mainCategoryExpense', 'SubCategoryExpense','MethodOfPayment', 'TotalSum',)
     radio_fields = {'Currency': admin.HORIZONTAL}
     fieldsets = (
         (None, {
             'fields': ('PaidName_text',
                        'TypeOfDocument', 'DocumentID',
                        ('PaymentStatus', 'PaymentDate'),
-                       ('MainCategory', 'SubCategory'),
+                       ('mainCategoryExpense', 'SubCategoryExpense'),
                        ('PaymentSum', 'Currency'),
                        'MethodOfPayment',
                        'description',
@@ -100,4 +100,6 @@ class ExpenseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Expense, ExpenseAdmin)
+admin.site.register(maincategory)
+admin.site.register(subcategory)
 # Register your adminmodels here.
