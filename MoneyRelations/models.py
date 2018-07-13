@@ -12,7 +12,7 @@ DocumentChoices = (
 )
 
 CurrencyChoices = (
-    ('TL', 'TL'),
+     ('TL', 'TL'),
     ('USD', 'USD'),
     ('EUR', 'EUR'),
 )
@@ -63,8 +63,8 @@ class Expense(models.Model):
     PaymentDate= models.DateField('Date of Payment', default=datetime.now, blank=False )
     # MainCategory = models.OneToOneField('MainCat',on_delete=models.CASCADE,default=True)
     # SubCategory = models.OneToOneField('SubCat',on_delete=models.CASCADE,default=True)
-    MainCategory = models.CharField('Main Category',max_length=9, choices=mainCategoryChoices.items(), default='')
-    SubCategory = models.CharField('Sub Category',max_length=9, choices=subCategoryChoices.items(), default='')
+    MainCategory = models.CharField('Main Category',max_length=30, default='')
+    SubCategory = models.CharField('Sub Category',max_length=30,  default='')
 
     PaymentSum = models.DecimalField('Payment Sum', default=0,max_digits=12,decimal_places=2,validators=[MaxValueValidator(999999999999)])
     UltraTotalSum = models.DecimalField('Payment Sum', default=0, max_digits=12, decimal_places=2,
