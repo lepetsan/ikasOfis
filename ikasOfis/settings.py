@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'dal',
+    'import_export',
     'dal_select2',
     'table',
     'django_tables2',
