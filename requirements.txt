@@ -12,7 +12,7 @@ django-tables2==1.21.2
 easy-thumbnails==2.5
 idna==2.7
 jet==1.0
-Jinja2==2.10
+Jinja2==2.11.3
 MarkupSafe==1.0
 pytz==2018.5
 requests==2.19.1
